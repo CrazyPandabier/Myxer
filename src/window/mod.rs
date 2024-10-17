@@ -12,3 +12,6 @@ pub use about::*;
 
 mod profiles;
 pub use profiles::*;
+
+mod midi_profiles;
+pub use midi_profiles::*;
