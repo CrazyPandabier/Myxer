@@ -25,6 +25,12 @@ pub struct Application {
 }
 
 impl Application {
+    pub fn new(name: &str) -> Self {
+        Application {
+            name: name.to_string(),
+        }
+    }
+
     pub fn get_name(&self) -> &str {
         &self.name
     }
@@ -55,5 +61,16 @@ impl ControllerProfile {
 
     pub fn get_groups(&self) -> &HashMap<Group, Vec<Application>> {
         &self.groups
+    }
+
+    pub fn add_application(&mut self, group_name: &str, app: Application) {
+        let group = self
+            .groups
+            .iter_mut()
+            .find(|group| group.0.name == group_name);
+
+        if let Some(group) = group {
+            group.1.push(app);
+        }
     }
 }

@@ -10,7 +10,7 @@ use gtk::prelude::*;
 use super::{about, midi_profiles, Profiles};
 use super::{style, MidiProfiles};
 use crate::meter::{Meter, SinkMeter, SourceMeter, StreamMeter};
-use crate::midi_controller::{ControllerProfile, Group};
+use crate::midi_controller::{Application, ControllerProfile, Group};
 use crate::pulse::Pulse;
 use crate::shared::Shared;
 
@@ -417,10 +417,13 @@ impl Myxer {
                 profiles.replace(Some(MidiProfiles::new(
                     &m_window,
                     &m_pulse,
-                    vec![
-                        ControllerProfile::new("Profile 1", vec![Group::new("Channel 1")]),
+                    &Shared::new(vec![
+                        ControllerProfile::new(
+                            "Profile 1",
+                            vec![Group::new("Channel 1"), Group::new("Channel 2")],
+                        ),
                         ControllerProfile::new("Profile 2", vec![Group::new("Channel 2")]),
-                    ],
+                    ]),
                 )));
             });
             actions.add_action(&midi_profiles);
